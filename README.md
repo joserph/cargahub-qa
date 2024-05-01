@@ -1,7 +1,7 @@
 
 ## CargaHub
 
-Sistema para gestion de agencias de cargar.
+Sistema para gestion para agencias de carga.
 
 ### CargaHub QA
 
