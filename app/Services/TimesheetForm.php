@@ -14,9 +14,9 @@ final class TimesheetForm
             Select::make('calendar_id')
                 ->relationship('calendar', 'name')
                 ->required(),
-            Select::make('user_id')
-                ->relationship('user', 'name')
-                ->required(),
+            // Select::make('user_id')
+            //     ->relationship('user', 'name')
+            //     ->required(),
             Select::make('type')
                 ->options([
                     'work' => 'Trabajando',

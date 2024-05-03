@@ -1,27 +1,33 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Personal\Resources;
 
-use App\Filament\Resources\TimesheetResource\Pages;
-use App\Filament\Resources\TimesheetResource\RelationManagers;
+use App\Filament\Personal\Resources\TimesheetResource\Pages;
+use App\Filament\Personal\Resources\TimesheetResource\RelationManagers;
 use App\Models\Timesheet;
 use App\Services\TimesheetForm;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Support\Facades\Auth;
 
 class TimesheetResource extends Resource
 {
     protected static ?string $model = Timesheet::class;
-    protected static ?string $navigationGroup = 'Gestion de Usuarios';
-    protected static ?int $navigationSort = 2;
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('user_id', Auth::user()->id);
+    }
 
-    protected static ?string $navigationIcon = 'heroicon-c-identification';
+protected static ?string $navigationGroup = 'Gestion de Usuarios';
+protected static ?int $navigationSort = 2;
+
+protected static ?string $navigationIcon = 'heroicon-c-identification';
 
     public static function form(Form $form): Form
     {
@@ -65,22 +71,18 @@ class TimesheetResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                // Tables\Filters\TrashedFilter::make(),
                 SelectFilter::make('type')
                 ->options([
                     'work' => 'Trabajando',
-                    'pause' => 'En Pausa',
+                    'pause' => 'En Pausa'
                 ])
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make(),
-                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ]);
     }
@@ -99,13 +101,5 @@ class TimesheetResource extends Resource
             // 'create' => Pages\CreateTimesheet::route('/create'),
             // 'edit' => Pages\EditTimesheet::route('/{record}/edit'),
         ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
     }
 }
