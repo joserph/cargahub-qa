@@ -15,8 +15,8 @@ class PersonalWidgetStats extends BaseWidget
     {
         return [
             Stat::make('Unique views', '192.1k'),
-            Stat::make('Bounce rate', '21%'),
             Stat::make('Total Work', $this->getTotalWork(Auth::user())),
+            Stat::make('Total Pause', $this->getTotalPause(Auth::user())),
         ];
     }
 
@@ -24,6 +24,24 @@ class PersonalWidgetStats extends BaseWidget
     {
         $timesheets = Timesheet::where('user_id', $user->id)
             ->where('type', 'work')->get();
+        $sumSeconds = 0;
+        foreach($timesheets as $timesheet)
+        {
+            $startTime = Carbon::parse($timesheet->day_in);
+            $finishTime = Carbon::parse($timesheet->day_out);
+
+            $totalDuration = $finishTime->diffInSeconds($startTime);
+            $sumSeconds = $sumSeconds + $totalDuration;
+        }
+        // dd($sumSeconds);
+        $timeFormat = gmdate('H:i:s', $sumSeconds);
+        return $timeFormat;
+    }
+
+    protected function getTotalPause(User $user)
+    {
+        $timesheets = Timesheet::where('user_id', $user->id)
+            ->where('type', 'pause')->get();
         $sumSeconds = 0;
         foreach($timesheets as $timesheet)
         {

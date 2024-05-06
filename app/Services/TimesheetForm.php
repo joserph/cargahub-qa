@@ -25,8 +25,7 @@ final class TimesheetForm
                 ->required(),
             DateTimePicker::make('day_in')
                 ->required(),
-            DateTimePicker::make('day_out')
-                ->required(),
+            DateTimePicker::make('day_out'),
         ];
     }
 }
