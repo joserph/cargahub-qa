@@ -38,35 +38,40 @@ final class UserForm
             ->columns(3)
             ->schema([
                 Select::make('country_id')
-                ->relationship(name: 'country', titleAttribute: 'name')
-                ->searchable()
-                ->preload()
-                ->live()
-                ->afterStateUpdated(function (Set $set){
-                    $set('state_id', null);
-                    $set('city_id', null);
-                })
-                ->required(),
+                    ->relationship(name: 'country', titleAttribute: 'name')
+                    ->searchable()
+                    ->preload()
+                    ->live()
+                    ->afterStateUpdated(function (Set $set){
+                        $set('state_id', null);
+                        $set('city_id', null);
+                    })
+                    ->required(),
                 Select::make('state_id')
-                ->options(fn (Get $get): Collection => State::query()
-                    ->where('country_id', $get('country_id'))
-                    ->pluck('name', 'id'))
-                ->searchable()
-                ->preload()
-                ->live()
-                ->afterStateUpdated(fn (Set $set) => $set('city_id', null))
-                ->required(),
+                    ->options(fn (Get $get): Collection => State::query()
+                        ->where('country_id', $get('country_id'))
+                        ->pluck('name', 'id'))
+                    ->searchable()
+                    ->preload()
+                    ->live()
+                    ->afterStateUpdated(fn (Set $set) => $set('city_id', null))
+                    ->required(),
                 Select::make('city_id')
-                ->options(fn (Get $get): Collection => City::query()
-                    ->where('state_id', $get('state_id'))
-                    ->pluck('name', 'id'))
-                ->searchable()
-                ->preload()
-                ->required(),
+                    ->options(fn (Get $get): Collection => City::query()
+                        ->where('state_id', $get('state_id'))
+                        ->pluck('name', 'id'))
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 TextInput::make('address')
-                ->required(),
+                    ->required(),
                 TextInput::make('postal_code')
-                ->required(),
+                    ->required(),
+                Select::make('roles')
+                    ->relationship('roles', 'name')
+                    ->multiple()
+                    ->preload()
+                    ->searchable()
             ])
             
         ];
