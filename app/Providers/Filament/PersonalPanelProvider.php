@@ -18,6 +18,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use pxlrbt\FilamentSpotlight\SpotlightPlugin;
 
 class PersonalPanelProvider extends PanelProvider
 {
@@ -56,16 +57,28 @@ class PersonalPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+                SpotlightPlugin::make(),
             ])
             ->userMenuItems([
                 MenuItem::make()
                     ->label('Admin')
                     ->url('/admin')
                     ->icon('heroicon-c-adjustments-vertical')
-                    ->visible(fn (): bool => auth()->user()?->hasAnyRole([
-                        'super_admin',
-                    ])),
+                    ->visible(function(){
+                        if(auth()->user()){
+                            if(auth()->user()?->hasAnyRole([
+                                'super_admin'
+                            ])){
+                                return true;
+                            }else{
+                                return false;
+                            }
+                        }else{
+                            return false;
+                        }
+                        
+                    }),
             ]);
     }
 }
