@@ -14,6 +14,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Support\Facades\Auth;
 
 class TimesheetResource extends Resource
 {
@@ -22,6 +23,7 @@ class TimesheetResource extends Resource
     protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationIcon = 'heroicon-c-identification';
+    
 
     public static function form(Form $form): Form
     {
@@ -33,10 +35,6 @@ class TimesheetResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('calendar.name')
-                    ->searchable()
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
                     ->searchable()
                     ->numeric()
@@ -106,6 +104,6 @@ class TimesheetResource extends Resource
         return parent::getEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
-            ]);
+            ])->where('user_id', Auth::user()->id)->orderBy('id', 'desc');
     }
 }

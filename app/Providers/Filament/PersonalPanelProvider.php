@@ -29,6 +29,7 @@ class PersonalPanelProvider extends PanelProvider
             ->path('personal')
             ->login()
             ->default()
+            ->profile()
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -68,7 +69,7 @@ class PersonalPanelProvider extends PanelProvider
                     ->visible(function(){
                         if(auth()->user()){
                             if(auth()->user()?->hasAnyRole([
-                                'super_admin'
+                                'super_admin', 'admin'
                             ])){
                                 return true;
                             }else{

@@ -12,10 +12,8 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Illuminate\Support\Collection;
-use Spatie\Permission\Models\Role;
-use Illuminate\Support\Arr;
 
-final class UserForm
+final class ForgotPasswordForm
 {
     public static function schema(): array
     {
@@ -31,7 +29,6 @@ final class UserForm
                     ->required()
                     ->maxLength(255),
                 TextInput::make('password')
-                    ->hiddenOn('edit')
                     ->password()
                     ->required()
                     ->maxLength(255),
@@ -74,19 +71,8 @@ final class UserForm
                     ->multiple()
                     ->preload()
                     ->searchable()
-                    ->visible(fn (): bool => auth()->user()?->hasAnyRole([
-                        'super_admin'
-                    ])),
             ])
             
         ];
-    }
-
-    public static function roles_()
-    {
-        $roles = Role::where('name', '!=', 'super_admin')->select('id', 'name')->get()->toArray();
-        $news_roles = Arr::pluck($roles, 'name', 'id');
-        // dd($news_roles);
-        return $news_roles;
     }
 }

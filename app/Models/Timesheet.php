@@ -22,9 +22,4 @@ class Timesheet extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    public function calendar(): BelongsTo
-    {
-        return $this->belongsTo(Calendar::class);
-    }
 }

@@ -11,12 +11,6 @@ final class TimesheetForm
     public static function schema(): array
     {
         return [
-            Select::make('calendar_id')
-                ->relationship('calendar', 'name')
-                ->required(),
-            // Select::make('user_id')
-            //     ->relationship('user', 'name')
-            //     ->required(),
             Select::make('type')
                 ->options([
                     'work' => 'Trabajando',

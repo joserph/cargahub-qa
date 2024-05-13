@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
+use Spatie\Permission\Models\Role;
 
 class User extends Authenticatable
 {
@@ -58,16 +59,6 @@ class User extends Authenticatable
     public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class);
-    }
-
-    public function calendars(): BelongsToMany
-    {
-        return $this->belongsToMany(Calendar::class);
-    }
-
-    public function departments(): BelongsToMany
-    {
-        return $this->belongsToMany(Department::class);
     }
 
     public function timesheets(): HasMany

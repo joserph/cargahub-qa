@@ -28,7 +28,6 @@ class ListTimesheets extends ListRecords
                 ->action(function(){
                     $user = Auth::user();
                     $timesheet = new Timesheet();
-                    $timesheet->calendar_id = 1;
                     $timesheet->user_id = Auth::user()->id;
                     $timesheet->day_in = Carbon::now();
                     // $timesheet->day_out = Carbon::now();
@@ -47,7 +46,6 @@ class ListTimesheets extends ListRecords
                 ->action(function(){
                     $user = Auth::user();
                     $timesheet = new Timesheet();
-                    $timesheet->calendar_id = 1;
                     $timesheet->user_id = Auth::user()->id;
                     $timesheet->day_in = Carbon::now();
                     // $timesheet->day_out = Carbon::now();
@@ -85,7 +83,6 @@ class ListTimesheets extends ListRecords
                     $lastTimesheet->day_out = Carbon::now();
                     $lastTimesheet->save();
                     $timesheet = new Timesheet();
-                    $timesheet->calendar_id = 1;
                     $timesheet->user_id = Auth::user()->id;
                     $timesheet->day_in = Carbon::now();
                     $timesheet->type = 'pause';
@@ -107,7 +104,6 @@ class ListTimesheets extends ListRecords
                     $lastTimesheet->day_out = Carbon::now();
                     $lastTimesheet->save();
                     $timesheet = new Timesheet();
-                    $timesheet->calendar_id = 1;
                     $timesheet->user_id = Auth::user()->id;
                     $timesheet->day_in = Carbon::now();
                     $timesheet->type = 'work';

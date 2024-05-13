@@ -29,6 +29,7 @@ class DashboardPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->profile()
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -60,7 +61,7 @@ class DashboardPanelProvider extends PanelProvider
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 PanelRoles::make()
                 ->roleToAssign('super_admin')
-                ->restrictedRoles(['super_admin']),
+                ->restrictedRoles(['super_admin', 'admin']),
             ])
             ->userMenuItems([
                 MenuItem::make()
@@ -68,7 +69,7 @@ class DashboardPanelProvider extends PanelProvider
                     ->url('/personal')
                     ->icon('heroicon-c-adjustments-vertical')
                     ->visible(fn (): bool => auth()->user()?->hasAnyRole([
-                        'super_admin',
+                        'super_admin', 'admin'
                     ])),
             ]);
     }

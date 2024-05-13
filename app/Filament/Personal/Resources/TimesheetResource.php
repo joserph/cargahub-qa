@@ -24,10 +24,10 @@ class TimesheetResource extends Resource
         return parent::getEloquentQuery()->where('user_id', Auth::user()->id)->orderBy('id', 'desc');
     }
 
-protected static ?string $navigationGroup = 'Gestion de Usuarios';
-protected static ?int $navigationSort = 2;
+    protected static ?string $navigationGroup = 'Gestion de Usuarios';
+    protected static ?int $navigationSort = 2;
 
-protected static ?string $navigationIcon = 'heroicon-c-identification';
+    protected static ?string $navigationIcon = 'heroicon-c-identification';
 
     public static function form(Form $form): Form
     {
@@ -39,10 +39,6 @@ protected static ?string $navigationIcon = 'heroicon-c-identification';
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('calendar.name')
-                    ->searchable()
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
                     ->searchable()
                     ->numeric()

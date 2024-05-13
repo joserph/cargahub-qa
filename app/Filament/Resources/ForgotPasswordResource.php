@@ -2,10 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Resources\ForgotPasswordResource\Pages;
+use App\Filament\Resources\ForgotPasswordResource\RelationManagers;
+use App\Models\ForgotPassword;
 use App\Models\User;
-use App\Services\UserForm;
+use App\Services\ForgotPasswordForm;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -14,32 +15,20 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Facades\Auth;
-use Spatie\Permission\Models\Role;
-use Illuminate\Support\Str;
 
-class UserResource extends Resource
+class ForgotPasswordResource extends Resource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = ForgotPassword::class;
     protected static ?string $navigationGroup = 'Gestion de Usuarios';
-    protected static ?int $navigationSort = 1;
+    protected static ?string $modelLabel = 'Recuperar Contraseña';
+    protected static ?int $navigationSort = 3;
 
-    public static function getEloquentQuery(): Builder
-    {
-        if(Auth::user()->roles[0]->name != 'super_admin')
-        {
-            return parent::getEloquentQuery()->where('id', '!=', 1)->orderBy('id', 'asc');
-        }else{
-            return parent::getEloquentQuery()->orderBy('id', 'asc');
-        }
-    }
-
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
         return $form
-            ->schema(UserForm::schema());
+            ->schema(ForgotPasswordForm::schema());
     }
 
     public static function table(Table $table): Table
@@ -47,13 +36,8 @@ class UserResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->searchable(),
+                ->searchable(),
                 TextColumn::make('email')
-                    ->searchable(),
-                TextColumn::make('roles.name')
-                    ->badge()
-                    ->formatStateUsing(fn ($state): string => Str::headline($state))
-                    ->colors(['primary'])
                     ->searchable(),
                 TextColumn::make('address')
                     ->sortable()
@@ -97,9 +81,9 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'index' => Pages\ListForgotPasswords::route('/'),
+            'create' => Pages\CreateForgotPassword::route('/create'),
+            'edit' => Pages\EditForgotPassword::route('/{record}/edit'),
         ];
     }
 }
