@@ -21,7 +21,8 @@ class TimesheetResource extends Resource
     protected static ?string $model = Timesheet::class;
     protected static ?string $navigationGroup = 'Gestion de Usuarios';
     protected static ?int $navigationSort = 2;
-
+    protected static ?string $modelLabel = 'Hoja de hora';
+    protected static ?string $pluralLabel = 'Hojas de horas';
     protected static ?string $navigationIcon = 'heroicon-c-identification';
     
 
@@ -71,8 +72,14 @@ class TimesheetResource extends Resource
                 ])
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->iconButton()
+                    ->iconSize('sm')
+                    ->color('warning')
+                    ->successNotificationTitle('Hojas de horas actualizado con exito!'),
+                Tables\Actions\DeleteAction::make()
+                    ->iconButton()
+                    ->iconSize('sm'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

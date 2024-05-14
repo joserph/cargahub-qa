@@ -18,6 +18,8 @@ class CityResource extends Resource
     protected static ?string $model = City::class;
     protected static ?string $navigationGroup = 'Gestion del Sistema';
     protected static ?int $navigationSort = 6;
+    protected static ?string $modelLabel = 'Ciudad';
+    protected static ?string $pluralLabel = 'Ciudades';
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
 
@@ -80,7 +82,11 @@ class CityResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->iconButton()
+                    ->iconSize('sm')
+                    ->color('warning')
+                    ->successNotificationTitle('Ciudad actualizado con exito!'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

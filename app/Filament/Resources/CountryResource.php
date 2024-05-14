@@ -18,6 +18,8 @@ class CountryResource extends Resource
     protected static ?string $model = Country::class;
     protected static ?string $navigationGroup = 'Gestion del Sistema';
     protected static ?int $navigationSort = 4;
+    protected static ?string $modelLabel = 'Pais';
+    protected static ?string $pluralLabel = 'Paises';
 
     protected static ?string $navigationIcon = 'heroicon-o-flag';
 
@@ -135,7 +137,11 @@ class CountryResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->iconButton()
+                    ->iconSize('sm')
+                    ->color('warning')
+                    ->successNotificationTitle('Pais actualizado con exito!'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -15,18 +15,21 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Resources\Pages\Concerns\InteractsWithRecord;
 
 class ForgotPasswordResource extends Resource
 {
     protected static ?string $model = ForgotPassword::class;
     protected static ?string $navigationGroup = 'Gestion de Usuarios';
     protected static ?string $modelLabel = 'Recuperar Contraseña';
+    protected static ?string $pluralLabel = 'Recuperar Contraseñas';
     protected static ?int $navigationSort = 3;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
+        // dd($form);
         return $form
             ->schema(ForgotPasswordForm::schema());
     }
@@ -62,7 +65,13 @@ class ForgotPasswordResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    // ->url('users/{record}/edit')
+                    ->iconButton()
+                    ->iconSize('sm')
+                    ->slideOver()
+                    ->color('warning')
+                    ->successNotificationTitle('Cliente actualizado con exito!'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -82,8 +91,8 @@ class ForgotPasswordResource extends Resource
     {
         return [
             'index' => Pages\ListForgotPasswords::route('/'),
-            'create' => Pages\CreateForgotPassword::route('/create'),
-            'edit' => Pages\EditForgotPassword::route('/{record}/edit'),
+            // 'create' => Pages\CreateForgotPassword::route('/create'),
+            'edit' => UserResource\Pages\EditForgotPassword::route('/{record}/edit'),
         ];
     }
 }

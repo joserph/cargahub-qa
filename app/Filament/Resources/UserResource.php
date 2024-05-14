@@ -23,6 +23,8 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
     protected static ?string $navigationGroup = 'Gestion de Usuarios';
     protected static ?int $navigationSort = 1;
+    protected static ?string $modelLabel = 'Usuario';
+    protected static ?string $pluralLabel = 'Usuarios';
 
     public static function getEloquentQuery(): Builder
     {
@@ -38,6 +40,7 @@ class UserResource extends Resource
 
     public static function form(Form $form): Form
     {
+        // dd($form);
         return $form
             ->schema(UserForm::schema());
     }
@@ -78,11 +81,16 @@ class UserResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->iconButton()
+                    ->iconSize('sm')
+                    ->color('warning')
+                    ->successNotificationTitle('Usuario actualizado con exito!'),
+                Tables\Actions\RestoreAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    // Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

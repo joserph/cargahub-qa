@@ -33,8 +33,11 @@ final class UserForm
                 TextInput::make('password')
                     ->hiddenOn('edit')
                     ->password()
-                    ->required()
-                    ->maxLength(255),
+                    // ->required()
+                    ->maxLength(255)
+                    ->visible(fn (): bool => auth()->user()?->hasAnyRole([
+                        'super_admin'
+                    ])),
             ]),
             Section::make('Direccion')
             ->columns(3)

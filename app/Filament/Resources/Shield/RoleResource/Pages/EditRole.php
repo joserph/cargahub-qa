@@ -18,7 +18,9 @@ class EditRole extends EditRecord
     protected function getActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()
+                ->icon('heroicon-o-trash')
+                ->successNotificationTitle('Rol eliminado con exito!'),
         ];
     }
 
