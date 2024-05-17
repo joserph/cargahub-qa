@@ -11,10 +11,6 @@ use Illuminate\Support\Collection;
 class CreateRole extends CreateRecord
 {
     protected static string $resource = RoleResource::class;
-    protected function getCreatedNotificationTitle(): ?string
-    {
-        return 'Rol creado con exito!';
-    }
 
     public Collection $permissions;
 

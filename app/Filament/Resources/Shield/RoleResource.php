@@ -105,14 +105,8 @@ class RoleResource extends Resource implements HasShieldPermissions
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->iconButton()
-                    ->iconSize('sm')
-                    ->color('warning')
-                    ->successNotificationTitle('Rol actualizado con exito!'),
-                Tables\Actions\DeleteAction::make()
-                    ->iconButton()
-                    ->iconSize('sm'),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

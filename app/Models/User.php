@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class User extends Authenticatable
@@ -55,6 +56,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public static function isSuperAdmin(): bool
+    {
+        if (Auth::user()->roles[0]->name === 'super_admin') {
+            return true;
+        }
+        return false;
+    }
 
     public function country(): BelongsTo
     {
