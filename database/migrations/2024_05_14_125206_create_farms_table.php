@@ -21,11 +21,11 @@ return new class extends Migration
             $table->string('country_id');
             $table->string('state_id');
             $table->string('city_id');
-            $table->string('phone')->nullable();
-            $table->string('cell_phone')->nullable();
-            $table->string('email');
+            // $table->string('phone')->nullable();
+            // $table->string('cell_phone')->nullable();
+            // $table->string('email');
             $table->string('agroquality_code')->nullable();
-            $table->string('status'); // Active, Suspended, Closed
+            $table->enum('status', ['activa', 'suspendida', 'cerrada']); // Active, Suspended, Closed
             $table->softDeletes();
 
             $table->timestamps();
