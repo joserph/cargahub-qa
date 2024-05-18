@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\City;
-use App\Models\Farm;
 use App\Models\State;
 use Filament\Forms;
 use Filament\Forms\Components\Repeater;
@@ -14,7 +13,7 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Illuminate\Support\Collection;
 
-final class FarmForm
+final class ClientForm
 {
     protected static array $statuses = [
         'activa'        => 'Activa',
@@ -31,24 +30,10 @@ final class FarmForm
                     TextInput::make('name')
                         ->autofocus()
                         ->extraInputAttributes(['class' => 'fi-uppercase'])
-                        ->columnSpan(2)
-                        ->label('Nombre de la finca')
-                        ->unique(ignoreRecord: true)
-                        ->required(),
-                    TextInput::make('ruc')
-                        ->unique(ignoreRecord: true)
-                        ->numeric()
-                        ->maxLength(13)
-                        ->label('RUC')
-                        ->required(),
-                    TextInput::make('tradename')
-                        ->extraInputAttributes(['class' => 'fi-uppercase'])
                         ->unique(ignoreRecord: true)
                         ->columnSpan(2)
-                        ->required()
-                        ->label('Nombre Comercial'),
-                    TextInput::make('agroquality_code')
-                        ->label('Codigo Agricultura'),
+                        ->label('Nombre del cliente')
+                        ->required(),
                     Select::make('status')
                         ->options(self::$statuses)
                         ->required(),
@@ -61,7 +46,7 @@ final class FarmForm
                                 ->prefix('+')
                                 ->label('Telefono')
                                 ->required(),
-                            TextInput::make('farm_id')
+                            TextInput::make('client_id')
                                 ->hidden()
                                 ->required(),
                         ])->addActionLabel('Agregar otro Telefono')
@@ -74,7 +59,7 @@ final class FarmForm
                                 ->label('Correo')
                                 ->email()
                                 ->required(),
-                            TextInput::make('farm_id')
+                            TextInput::make('client_id')
                                 ->hidden()
                                 ->required(),
                         ])->addActionLabel('Agregar otro Correo')
@@ -116,9 +101,10 @@ final class FarmForm
                         ->columnSpan(2)
                         ->label('Direccion')
                         ->required(),
+                    TextInput::make('zip_code')
+                        ->label('Zip code'),
                 ])
         ];
     }
 
-    
 }
