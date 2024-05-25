@@ -39,7 +39,7 @@ class ListDiseases extends ListRecords
         
         if(User::isSuperAdmin())
         {
-            $tabs['all'] = Tab::make('Totas')
+            $tabs['all'] = Tab::make('Todas')
                 ->badge(Disease::withoutTrashed()->count())
                 ->modifyQueryUsing(function($query){
                     return $query->withoutTrashed();
