@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect('/personal');
 });
+Route::get('return-report-pdf/{id}', [PdfController::class, 'returnReportPdf'])->name('return-report.pdf');
+Route::get('quality-control-report-pdf/{id}', [PdfController::class, 'qualityControlReportPdf'])->name('quality-control-report.pdf');

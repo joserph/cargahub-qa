@@ -93,11 +93,14 @@ class DialingResource extends Resource
                 // Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->iconButton()
+                    ->iconSize('sm')
+                    ->color('success'),
                 Tables\Actions\EditAction::make()
                     ->iconButton()
                     ->iconSize('sm')
-                    ->slideOver()
+                    // ->slideOver()
                     ->color('warning')
                     ->successNotificationTitle('Cliente actualizado con exito!')
                     ->mutateFormDataUsing(function (array $data): array {

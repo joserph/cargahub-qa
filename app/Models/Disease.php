@@ -17,13 +17,13 @@ class Disease extends Model
         'type'
     ];
 
-    // public function return_report_items(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(ReturnReportItem::class, 'return_report_item_disease')->withTimestamps();
-    // }
+    public function return_report_items(): BelongsToMany
+    {
+        return $this->belongsToMany(ReturnReportItem::class, 'return_report_item_disease')->withTimestamps();
+    }
 
-    // public function return_report_items_diseases(): HasMany
-    // {
-    //     return $this->hasMany(ReturnReportItemDisease::class, 'disease_id');
-    // }
+    public function return_report_items_diseases(): HasMany
+    {
+        return $this->hasMany(ReturnReportItemDisease::class, 'disease_id');
+    }
 }
