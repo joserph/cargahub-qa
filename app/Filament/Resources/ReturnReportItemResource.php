@@ -21,7 +21,7 @@ class ReturnReportItemResource extends Resource
 {
     protected static ?string $model = ReturnReportItem::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-arrow-down-on-square';
 
     protected static ?string $modelLabel = 'Informe';
 
@@ -44,6 +44,7 @@ class ReturnReportItemResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('hawb')
                     ->label('HAWB')
+                    ->extraAttributes(['class' => 'fi-uppercase'])
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('return_report.client.name')
@@ -66,7 +67,10 @@ class ReturnReportItemResource extends Resource
                 // Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->iconButton()
+                    ->iconSize('sm')
+                    ->color('success'),
                 Tables\Actions\EditAction::make()
                     ->iconButton()
                     ->iconSize('sm')
@@ -107,9 +111,9 @@ class ReturnReportItemResource extends Resource
     {
         return [
             'index' => Pages\ListReturnReportItems::route('/'),
-            'create' => Pages\CreateReturnReportItem::route('/create'),
+            // 'create' => Pages\CreateReturnReportItem::route('/create'),
             'view' => Pages\ViewReturnReportItem::route('/{record}'),
-            'edit' => Pages\EditReturnReportItem::route('/{record}/edit'),
+            // 'edit' => Pages\EditReturnReportItem::route('/{record}/edit'),
         ];
     }
 

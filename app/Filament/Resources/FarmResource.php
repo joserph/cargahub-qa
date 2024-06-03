@@ -65,19 +65,19 @@ class FarmResource extends Resource
                     ->label('Correo')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('state')
+                TextColumn::make('country.name')
+                    ->sortable()
+                    ->label('Pais')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('state.name')
                     ->sortable()
                     ->label('Estado')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('city')
+                TextColumn::make('city.name')
                     ->sortable()
                     ->label('Ciudad')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('country')
-                    ->sortable()
-                    ->label('Pais')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('agroquality_code')

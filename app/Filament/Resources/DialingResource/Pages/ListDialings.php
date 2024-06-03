@@ -24,8 +24,6 @@ class ListDialings extends ListRecords
                 ->mutateFormDataUsing(function (array $data): array {
                     $data['name'] = Str::of($data['name'])->upper();
                     $data['address'] = Str::of($data['address'])->apa();
-                    $data['state'] = Str::of($data['state'])->upper();
-                    $data['city'] = Str::of($data['city'])->upper();
                     
                     return $data;
                 }),

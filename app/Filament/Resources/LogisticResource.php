@@ -22,8 +22,8 @@ class LogisticResource extends Resource
 {
     protected static ?string $model = Logistic::class;
     protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
-    protected static ?string $modelLabel = 'Empresa de Logistica';
-    protected static ?string $pluralLabel = 'Empresas de Logistica';
+    protected static ?string $modelLabel = 'Agencia de Carga';
+    protected static ?string $pluralLabel = 'Agencias de Carga';
 
     public static function form(Form $form): Form
     {
@@ -56,19 +56,19 @@ class LogisticResource extends Resource
                     ->label('Correo')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('state')
+                TextColumn::make('country.name')
+                    ->sortable()
+                    ->label('Pais')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('state.name')
                     ->sortable()
                     ->label('Estado')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('city')
+                TextColumn::make('city.name')
                     ->sortable()
                     ->label('Ciudad')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('country')
-                    ->sortable()
-                    ->label('Pais')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
@@ -89,7 +89,7 @@ class LogisticResource extends Resource
                     ->iconButton()
                     ->iconSize('sm')
                     ->color('warning')
-                    ->successNotificationTitle('Empresa de logistica actualizado con exito!')
+                    ->successNotificationTitle('Agencia de Carga actualizado con exito!')
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['name'] = Str::of($data['name'])->upper();
                         $data['address'] = Str::of($data['address'])->apa();
@@ -100,7 +100,7 @@ class LogisticResource extends Resource
                     ->iconButton()
                     ->iconSize('sm')
                     ->color('danger')
-                    ->successNotificationTitle('Empresa de logistica eliminada con exito!'),
+                    ->successNotificationTitle('Agencia de Carga eliminada con exito!'),
                 Tables\Actions\RestoreAction::make()
             ])
             ->bulkActions([

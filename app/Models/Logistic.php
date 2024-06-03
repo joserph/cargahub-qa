@@ -31,7 +31,14 @@ class Logistic extends Model
     {
         return $this->belongsTo(Country::class);
     }
-
+    public function state(): BelongsTo
+    {
+        return $this->belongsTo(State::class);
+    }
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
     public function phones(): HasMany
     {
         return $this->hasMany(LogisticPhone::class);

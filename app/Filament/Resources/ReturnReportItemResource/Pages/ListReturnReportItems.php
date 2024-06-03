@@ -21,7 +21,7 @@ class ListReturnReportItems extends ListRecords
                 ->modalWidth(MaxWidth::FiveExtraLarge)
                 ->successNotificationTitle('Reporte de devolucion creado con exito!')
                 ->mutateFormDataUsing(function (array $data): array {
-                    $data['guide_number'] = Str::of($data['guide_number'])->upper();
+                    $data['hawb'] = Str::of($data['hawb'])->upper();
                     
                     return $data;
                 }),

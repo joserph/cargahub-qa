@@ -9,3 +9,7 @@
 .fi-uppercase{
     text-transform: uppercase;
 }
+
+.filepond--item[data-drag-state]{
+    width: calc(25% - 0.5em);
+}

@@ -78,11 +78,11 @@ class DialingResource extends Resource
                     ->label('Zip Code')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('logistic.name')
-                    ->sortable()
-                    ->label('Empresa de Logistica')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                // Tables\Columns\TextColumn::make('logistic.name')
+                //     ->sortable()
+                //     ->label('Empresa de Logistica')
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->label('Fecha Creacion')
@@ -106,8 +106,6 @@ class DialingResource extends Resource
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['name'] = Str::of($data['name'])->upper();
                         $data['address'] = Str::of($data['address'])->apa();
-                        $data['state'] = Str::of($data['state'])->upper();
-                        $data['city'] = Str::of($data['city'])->upper();
                         
                         return $data;
                     }),

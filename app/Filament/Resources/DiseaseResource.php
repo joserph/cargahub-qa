@@ -58,7 +58,7 @@ class DiseaseResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->iconButton()
                     ->iconSize('sm')
-                    ->slideOver()
+                    // ->slideOver()
                     ->color('warning')
                     ->successNotificationTitle('Enfermedad actualizada con exito!')
                     ->mutateFormDataUsing(function (array $data): array {
@@ -94,9 +94,9 @@ class DiseaseResource extends Resource
     {
         return [
             'index' => Pages\ListDiseases::route('/'),
-            'create' => Pages\CreateDisease::route('/create'),
+            // 'create' => Pages\CreateDisease::route('/create'),
             'view' => Pages\ViewDisease::route('/{record}'),
-            'edit' => Pages\EditDisease::route('/{record}/edit'),
+            // 'edit' => Pages\EditDisease::route('/{record}/edit'),
         ];
     }
 

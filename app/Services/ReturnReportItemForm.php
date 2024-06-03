@@ -123,8 +123,10 @@ final class ReturnReportItemForm
                                 ->required()
                                 ->reorderable()
                                 ->optimize('webp')
-                                ->resize(50)
+                                ->resize(90)
                                 ->imagePreviewHeight('100')
+                                ->minFiles(2)
+                                ->maxFiles(25)
                         ])->columnSpan(4)
                 
                 ])->columns(4)

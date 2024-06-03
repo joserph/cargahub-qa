@@ -20,10 +20,9 @@ class ListVarieties extends ListRecords
             Actions\CreateAction::make()
             ->icon('heroicon-o-plus-circle')
                 ->color('info')
-                ->successNotificationTitle('Producto creado con exito!')
+                ->successNotificationTitle('Variedad creada con exito!')
                 ->mutateFormDataUsing(function (array $data): array {
                     $data['name'] = Str::of($data['name'])->upper();
-                    $data['scientific_name'] = Str::of($data['scientific_name'])->upper();
                     
                     return $data;
                 }),

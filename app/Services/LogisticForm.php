@@ -65,7 +65,7 @@ final class LogisticForm
                                 ])->addActionLabel('Agregar otro Correo')
                                 ->reorderable(true),
                             FileUpload::make('image_url')
-                                ->label('Imagen de la empresa')
+                                ->label('Imagen de la empresa (300x300)')
                                 ->directory('company/')
                                 ->image()
                                 ->imageEditor()

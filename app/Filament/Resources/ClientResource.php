@@ -57,12 +57,17 @@ class ClientResource extends Resource
                     ->label('Correo')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('state')
+                TextColumn::make('country.name')
+                    ->sortable()
+                    ->label('Pais')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('state.name')
                     ->sortable()
                     ->label('Estado')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('city')
+                TextColumn::make('city.name')
                     ->sortable()
                     ->label('Ciudad')
                     ->searchable()
@@ -70,11 +75,6 @@ class ClientResource extends Resource
                 TextColumn::make('zip_code')
                     ->sortable()
                     ->label('Zip Code')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('country')
-                    ->sortable()
-                    ->label('Pais')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('logistic.name')
@@ -139,7 +139,7 @@ class ClientResource extends Resource
             'index' => Pages\ListClients::route('/'),
             // 'create' => Pages\CreateClient::route('/create'),
             'view' => Pages\ViewClient::route('/{record}'),
-            'edit' => Pages\EditClient::route('/{record}/edit'),
+            // 'edit' => Pages\EditClient::route('/{record}/edit'),
         ];
     }
 

@@ -21,7 +21,7 @@ class ListLogistics extends ListRecords
             Actions\CreateAction::make()
                 ->icon('heroicon-o-plus-circle')
                 ->color('info')
-                ->successNotificationTitle('Hoja de hora creada con exito!')
+                ->successNotificationTitle('Agencia de Carga creada con exito!')
                 ->mutateFormDataUsing(function (array $data): array {
                     $data['name'] = Str::of($data['name'])->upper();
                     $data['address'] = Str::of($data['address'])->apa();

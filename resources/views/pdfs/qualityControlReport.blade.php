@@ -217,7 +217,7 @@
             top: 10px;
         }
         .img_size{
-            width: 120px;
+            width: 60px;
         }
     </style>
 </head>
@@ -233,7 +233,7 @@
                     <td class="text-small text-right"><strong>FINCA:</strong></td>
                     <td class="text-small">{{ $returnReportItem->farm->name }}</td>
                     <td class="text-small text-right"><strong>DIA DE  INSPECCION:</strong></td>
-                    <td class="text-small">{{ $returnReport->date }}</td>
+                    <td class="text-small">{{ date('d-m-Y', strtotime($returnReport->date)) }}</td>
                 </tr>
                 <tr>
                     <td class="text-small text-right"><strong>CLIENTE:</strong></td>

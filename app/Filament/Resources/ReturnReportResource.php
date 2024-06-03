@@ -21,7 +21,7 @@ class ReturnReportResource extends Resource
 {
     protected static ?string $model = ReturnReport::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-receipt-refund';
 
     protected static ?string $modelLabel = 'Reporte de Devolucion';
 
@@ -59,7 +59,7 @@ class ReturnReportResource extends Resource
                     ->label('Nuemro de Guia')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('destination')
+                Tables\Columns\TextColumn::make('country.name')
                     ->label('Destino')
                     ->sortable()
                     ->searchable(),
@@ -68,7 +68,10 @@ class ReturnReportResource extends Resource
                 // Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->iconButton()
+                    ->iconSize('sm')
+                    ->color('success'),
                 Tables\Actions\EditAction::make()
                 ->iconButton()
                     ->iconSize('sm')
@@ -77,6 +80,7 @@ class ReturnReportResource extends Resource
                     ->successNotificationTitle('Reporte de devolucion actualizado con exito!')
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['guide_number'] = Str::of($data['guide_number'])->upper();
+                        // $data['hawb'] = Str::of($data['hawb'])->upper();
                         
                         return $data;
                     }),
