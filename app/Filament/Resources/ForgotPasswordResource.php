@@ -23,7 +23,7 @@ class ForgotPasswordResource extends Resource
     protected static ?string $navigationGroup = 'Gestion de Usuarios';
     protected static ?string $modelLabel = 'Recuperar Contraseña';
     protected static ?string $pluralLabel = 'Recuperar Contraseñas';
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 13;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

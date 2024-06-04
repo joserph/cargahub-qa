@@ -19,6 +19,8 @@ use Illuminate\Support\Str;
 class DialingResource extends Resource
 {
     protected static ?string $model = Dialing::class;
+    protected static ?string $navigationGroup = 'Parametrización';
+    protected static ?int $navigationSort = 6;
 
     protected static ?string $navigationIcon = 'heroicon-o-bookmark-square';
 

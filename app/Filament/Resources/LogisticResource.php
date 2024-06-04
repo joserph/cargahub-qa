@@ -21,6 +21,8 @@ use Illuminate\Support\Str;
 class LogisticResource extends Resource
 {
     protected static ?string $model = Logistic::class;
+    protected static ?string $navigationGroup = 'Parametrización';
+    protected static ?int $navigationSort = 4;
     protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
     protected static ?string $modelLabel = 'Agencia de Carga';
     protected static ?string $pluralLabel = 'Agencias de Carga';

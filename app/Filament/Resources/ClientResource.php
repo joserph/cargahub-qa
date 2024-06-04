@@ -20,6 +20,8 @@ use Illuminate\Support\Str;
 class ClientResource extends Resource
 {
     protected static ?string $model = Client::class;
+    protected static ?string $navigationGroup = 'Parametrización';
+    protected static ?int $navigationSort = 5;
 
     protected static ?string $navigationIcon = 'heroicon-o-ticket';
     protected static ?string $modelLabel = 'Cliente';

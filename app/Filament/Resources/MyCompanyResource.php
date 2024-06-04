@@ -2,37 +2,37 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\VarietyResource\Pages;
-use App\Filament\Resources\VarietyResource\RelationManagers;
+use App\Filament\Resources\MyCompanyResource\Pages;
+use App\Filament\Resources\MyCompanyResource\RelationManagers;
+use App\Models\MyCompany;
 use App\Models\User;
-use App\Models\Variety;
-use App\Services\VarietyForm;
+use App\Services\MyCompanyForm;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 
-class VarietyResource extends Resource
+class MyCompanyResource extends Resource
 {
-    protected static ?string $model = Variety::class;
-    protected static ?string $navigationGroup = 'Infomacion Fincas';
-    protected static ?int $navigationSort = 10;
+    protected static ?string $model = MyCompany::class;
+    protected static ?string $navigationGroup = 'Parametrización';
+    protected static ?int $navigationSort = 3;
 
-    protected static ?string $navigationIcon = 'heroicon-o-fire';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
 
-    protected static ?string $modelLabel = 'Variedad';
-
-    protected static ?string $pluralLabel = 'Variedades';
+    protected static ?string $modelLabel = 'Mi Empresa';
+    protected static ?string $pluralLabel = 'Mi Empresa';
 
     public static function form(Form $form): Form
     {
         return $form
-            ->schema(VarietyForm::schema());
+            ->schema(MyCompanyForm::schema());
     }
 
     public static function table(Table $table): Table
@@ -41,13 +41,40 @@ class VarietyResource extends Resource
             ->columns([
                 TextColumn::make('name')
                     ->sortable()
-                    ->extraAttributes(['class' => 'fi-uppercase'])
-                    ->label('Nombre de la Variedad')
+                    ->label('Nombre')
                     ->searchable(),
-                TextColumn::make('product.name')
-                    ->label('Producto')
+                TextColumn::make('ruc')
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('phone')
+                    ->label('Telefono'),
+                ImageColumn::make('image_url')
+                    ->label('Imagen'),
+                TextColumn::make('address')
+                    ->sortable()
+                    ->label('Direccion')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('email')
+                    ->sortable()
+                    ->label('Correo')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('country.name')
+                    ->sortable()
+                    ->label('Pais')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('state.name')
+                    ->sortable()
+                    ->label('Estado')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('city.name')
+                    ->sortable()
+                    ->label('Ciudad')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->label('Fecha Creacion')
@@ -65,17 +92,19 @@ class VarietyResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->iconButton()
                     ->iconSize('sm')
-                    ->slideOver()
                     ->color('warning')
-                    ->successNotificationTitle('Variedad actualizada con exito!')
+                    ->successNotificationTitle('Mi Empresa actualizada con exito!')
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['name'] = Str::of($data['name'])->upper();
+                        $data['address'] = Str::of($data['address'])->apa();
                         
                         return $data;
                     }),
                 Tables\Actions\DeleteAction::make()
                     ->iconButton()
-                    ->iconSize('sm'),
+                    ->iconSize('sm')
+                    ->color('danger')
+                    ->successNotificationTitle('Mi Empresa eliminada con exito!'),
                 Tables\Actions\RestoreAction::make()
             ])
             ->bulkActions([
@@ -100,10 +129,10 @@ class VarietyResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListVarieties::route('/'),
-            // 'create' => Pages\CreateVariety::route('/create'),
-            'view' => Pages\ViewVariety::route('/{record}'),
-            // 'edit' => Pages\EditVariety::route('/{record}/edit'),
+            'index' => Pages\ListMyCompanies::route('/'),
+            // 'create' => Pages\CreateMyCompany::route('/create'),
+            'view' => Pages\ViewMyCompany::route('/{record}'),
+            // 'edit' => Pages\EditMyCompany::route('/{record}/edit'),
         ];
     }
 

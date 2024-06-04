@@ -20,6 +20,8 @@ use Illuminate\Support\Str;
 class ReturnReportResource extends Resource
 {
     protected static ?string $model = ReturnReport::class;
+    protected static ?string $navigationGroup = 'Seccion Informes';
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $navigationIcon = 'heroicon-o-receipt-refund';
 

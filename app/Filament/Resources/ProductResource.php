@@ -20,6 +20,8 @@ use Illuminate\Support\Str;
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
+    protected static ?string $navigationGroup = 'Infomacion Fincas';
+    protected static ?int $navigationSort = 9;
 
     protected static ?string $navigationIcon = 'heroicon-o-code-bracket-square';
 

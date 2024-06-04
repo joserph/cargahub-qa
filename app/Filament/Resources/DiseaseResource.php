@@ -19,6 +19,8 @@ use Illuminate\Support\Str;
 class DiseaseResource extends Resource
 {
     protected static ?string $model = Disease::class;
+    protected static ?string $navigationGroup = 'Parametrización';
+    protected static ?int $navigationSort = 7;
 
     protected static ?string $navigationIcon = 'heroicon-o-bug-ant';
 

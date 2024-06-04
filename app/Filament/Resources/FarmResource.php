@@ -20,6 +20,8 @@ use Illuminate\Support\Str;
 class FarmResource extends Resource
 {
     protected static ?string $model = Farm::class;
+    protected static ?string $navigationGroup = 'Infomacion Fincas';
+    protected static ?int $navigationSort = 8;
     protected static ?string $navigationIcon = 'heroicon-o-sparkles';
     protected static ?string $modelLabel = 'Finca';
     protected static ?string $pluralLabel = 'Fincas';

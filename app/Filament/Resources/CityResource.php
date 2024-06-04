@@ -17,7 +17,7 @@ class CityResource extends Resource
 {
     protected static ?string $model = City::class;
     protected static ?string $navigationGroup = 'Gestion del Sistema';
-    protected static ?int $navigationSort = 6;
+    protected static ?int $navigationSort = 16;
     protected static ?string $modelLabel = 'Ciudad';
     protected static ?string $pluralLabel = 'Ciudades';
 
