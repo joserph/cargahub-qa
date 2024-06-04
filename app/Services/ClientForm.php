@@ -31,9 +31,15 @@ final class ClientForm
                         ->autofocus()
                         ->extraInputAttributes(['class' => 'fi-uppercase'])
                         ->unique(ignoreRecord: true)
-                        ->columnSpan(2)
+                        ->columnSpan(3)
                         ->label('Nombre del cliente')
                         ->required(),
+                    TextInput::make('tradename')
+                        ->autofocus()
+                        ->extraInputAttributes(['class' => 'fi-uppercase'])
+                        ->unique(ignoreRecord: true)
+                        ->columnSpan(2)
+                        ->label('Nombre Comercial'),
                     Select::make('status')
                         ->options(self::$statuses)
                         ->required(),

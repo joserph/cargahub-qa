@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
+            $table->string('tradename')->nullable();
             $table->text('address')->nullable();
             $table->string('country_id')->nullable();
             $table->string('state_id')->nullable();

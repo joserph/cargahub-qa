@@ -87,6 +87,11 @@ class ClientResource extends Resource
                     ->label('Fecha Creacion')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('tradename')
+                    ->sortable()
+                    ->extraAttributes(['class' => 'fi-uppercase'])
+                    ->label('Nombre Comercial')
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 // Tables\Filters\TrashedFilter::make(),
