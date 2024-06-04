@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('dialing_id');
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->softDeletes();
 
             $table->timestamps();

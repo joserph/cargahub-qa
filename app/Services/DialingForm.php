@@ -34,7 +34,7 @@ final class DialingForm
                         ->extraInputAttributes(['class' => 'fi-uppercase'])
                         ->unique(ignoreRecord: true)
                         ->columnSpan(2)
-                        ->label('Nombre del cliente')
+                        ->label('Nombre de la marcacion')
                         ->required(),
                     Select::make('status')
                         ->options(self::$statuses)
@@ -46,11 +46,10 @@ final class DialingForm
                             TextInput::make('phone')
                                 ->numeric()
                                 ->prefix('+')
-                                ->label('Telefono')
-                                ->required(),
-                            TextInput::make('client_id')
-                                ->hidden()
-                                ->required(),
+                                ->label('Telefono'),
+                            // TextInput::make('dialing_id')
+                            // ->disabled()
+                            //     ->hidden()
                         ])->addActionLabel('Agregar otro Telefono')
                         ->reorderable(true),
                     Repeater::make('emails')
@@ -59,11 +58,9 @@ final class DialingForm
                         ->schema([
                             TextInput::make('email')
                                 ->label('Correo')
-                                ->email()
-                                ->required(),
-                            TextInput::make('client_id')
-                                ->hidden()
-                                ->required(),
+                                ->email(),
+                            // TextInput::make('dialing_id')
+                            //     ->hidden()
                         ])->addActionLabel('Agregar otro Correo')
                         ->reorderable(true),
                 ]),
