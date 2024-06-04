@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Disease;
+use App\Models\MyCompany;
 use App\Models\ReturnReport;
 use App\Models\ReturnReportItem;
 use App\Models\ReturnReportItemDisease;
@@ -49,10 +50,11 @@ class PdfController extends Controller
         $images = ReturnReportItem::select('images')->find($id);
         $arrayImages = $images->images;
         $diseasesItems = ReturnReportItemDisease::with('disease')->with('returnReportItem')->where('return_report_item_id', $returnReportItem->id)->get();
-        // dd($diseasesApariencia);
+        $myCompany = MyCompany::first();
+        // dd($myCompany);
         $returnReportPdf = Pdf::loadView('pdfs.qualityControlReport', compact(
             'returnReportItem', 'returnReport', 'diseasesApariencia', 'diseasesFlor', 'diseasesSanidad', 'diseasesTallos',
-            'diseasesFollaje', 'diseasesEmpaque', 'arrayImages', 'diseasesItems'
+            'diseasesFollaje', 'diseasesEmpaque', 'arrayImages', 'diseasesItems', 'myCompany'
         ));
         return $returnReportPdf->stream();
     }

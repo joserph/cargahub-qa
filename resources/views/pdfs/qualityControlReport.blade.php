@@ -20,8 +20,12 @@
             position: relative;
             /* width: 90%; */
             top: -30px;
-            color: blue;
+            /* color: rgb(25, 25, 33); */
+            background-color: #18908d;
+            color: white;
             text-align: center;
+            text-align: center;
+            /* font-size: 20px; */
         }
         .text-center{
             text-align: center;
@@ -219,13 +223,24 @@
         .img_size{
             width: 60px;
         }
+        footer {
+            position: fixed;
+            bottom: -10px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            background-color: #18908d;
+            color: white;
+            text-align: center;
+            line-height: 35px;
+        }
     </style>
 </head>
 <body>
-    <h1 class="text-center text-large-xl">Control de Calidad</h1>
+    <h1 class="text-center text-large-xl">Control de Calidad {{ $myCompany->tradename }}</h1>
     <section>
         <article class="img">
-            <img class="img_size" src="{{ public_path('storage/'. $returnReport->logistic->image_url) }}" alt="">
+            <img class="img_size" src="{{ public_path('storage/'. $myCompany->image_url) }}" alt="">
         </article>
         <article class="table-cabecera">
             <table class="t-cabecera">
@@ -620,5 +635,8 @@
             @endforeach
         @endif
     </section>
+    <footer class="text-center">
+        Copyright © <?php echo date("Y");?> - {{ $myCompany->name }}
+    </footer>
 </body>
 </html>
