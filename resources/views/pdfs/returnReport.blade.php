@@ -97,8 +97,10 @@
             width: 100%;
         }
         .cabezera{
+            position: relative;
             width: 60%;
             margin: auto;
+            top: -80px;
         }
         .cab_td{
             border: 1px solid white;
@@ -155,11 +157,28 @@
         .firma_td{
             border-top: 1px solid black;
         }
+        .img{
+            position: relative;
+            width: 16%;
+            display: inline-block;
+            height: 80px;
+            max-width: 125px;
+            margin: 10px;
+            text-align: center;
+            margin: 0 auto;
+            top: -50px;
+        }
+        .img_size{
+            width: 80px;
+        }   
     </style>
 </head>
 <body>
     <header>
         <h3 class="text-center"><ins>REGISTRO DE DEVOLUCION FINCA</ins></h3>
+        <article class="img">
+            <img class="img_size" src="{{ public_path('storage/'. $myCompany->image_url) }}" alt="">
+        </article>
         <table class="cabezera">
             <tbody class="cab_tbody">
                 <tr class="cab_tr">
@@ -176,7 +195,7 @@
                 </tr>
                 <tr class="cab_tr">
                     <td class="cab_td">DESTINO:</td>
-                    <td class="cab_td">{{ $returnReport->destination }}</td>
+                    <td class="cab_td">{{ Str::upper($returnReport->country->name) }}</td>
                     <td class="cab_td"></td>
                     <td class="cab_td"></td>
                 </tr>

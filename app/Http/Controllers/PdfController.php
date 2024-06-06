@@ -14,14 +14,15 @@ class PdfController extends Controller
 {
     public function returnReportPdf($id)
     {
-        $returnReport = ReturnReport::with('logistic')->with('client')->with('returnReportItems')->find($id);
+        $returnReport = ReturnReport::with('logistic')->with('client')->with('country')->with('returnReportItems')->find($id);
         $returnReportItems = ReturnReportItem::with('diseases')->where('return_report_id', $returnReport->id)->get();
-        // dd($returnReportItems);
+        // dd($returnReport);
+        $myCompany = MyCompany::first();
         $returnReportPdf = Pdf::loadView('pdfs.returnReport', compact(
-            'returnReport', 'returnReportItems'
+            'returnReport', 'returnReportItems', 'myCompany'
         ));
         return $returnReportPdf->setPaper('a4', 'landscape')->stream();
-
+        
         // dd($returnReport);
     }
 
