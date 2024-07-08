@@ -39,70 +39,70 @@ final class DialingForm
                     Select::make('status')
                         ->options(self::$statuses)
                         ->required(),
-                    Repeater::make('phones')
-                        ->label('Tefefono')
-                        ->relationship()
-                        ->schema([
-                            TextInput::make('phone')
-                                ->numeric()
-                                ->prefix('+')
-                                ->label('Telefono'),
-                            // TextInput::make('dialing_id')
-                            // ->disabled()
-                            //     ->hidden()
-                        ])->addActionLabel('Agregar otro Telefono')
-                        ->reorderable(true),
-                    Repeater::make('emails')
-                        ->label('Correo')
-                        ->relationship()
-                        ->schema([
-                            TextInput::make('email')
-                                ->label('Correo')
-                                ->email(),
-                            // TextInput::make('dialing_id')
-                            //     ->hidden()
-                        ])->addActionLabel('Agregar otro Correo')
-                        ->reorderable(true),
+                    // Repeater::make('phones')
+                    //     ->label('Tefefono')
+                    //     ->relationship()
+                    //     ->schema([
+                    //         TextInput::make('phone')
+                    //             ->numeric()
+                    //             ->prefix('+')
+                    //             ->label('Telefono'),
+                    //         // TextInput::make('dialing_id')
+                    //         // ->disabled()
+                    //         //     ->hidden()
+                    //     ])->addActionLabel('Agregar otro Telefono')
+                    //     ->reorderable(true),
+                    // Repeater::make('emails')
+                    //     ->label('Correo')
+                    //     ->relationship()
+                    //     ->schema([
+                    //         TextInput::make('email')
+                    //             ->label('Correo')
+                    //             ->email(),
+                    //         // TextInput::make('dialing_id')
+                    //         //     ->hidden()
+                    //     ])->addActionLabel('Agregar otro Correo')
+                    //     ->reorderable(true),
                 ]),
-                Section::make('Direccion')
-                ->columns(3)
-                ->schema([
-                    Select::make('country_id')
-                        ->label('Pais')
-                        ->relationship(name: 'country', titleAttribute: 'name')
-                        ->searchable()
-                        ->preload()
-                        ->live()
-                        ->afterStateUpdated(function (Set $set){
-                            $set('state_id', null);
-                            $set('city_id', null);
-                        })
-                        ->required(),
-                    Select::make('state_id')
-                        ->label('Estado')
-                        ->options(fn (Get $get): Collection => State::query()
-                            ->where('country_id', $get('country_id'))
-                            ->pluck('name', 'id'))
-                        ->searchable()
-                        ->preload()
-                        ->live()
-                        ->afterStateUpdated(fn (Set $set) => $set('city_id', null))
-                        ->required(),
-                    Select::make('city_id')
-                        ->label('Ciudad')
-                        ->options(fn (Get $get): Collection => City::query()
-                            ->where('state_id', $get('state_id'))
-                            ->pluck('name', 'id'))
-                        ->searchable()
-                        ->preload()
-                        ->required(),
-                    TextInput::make('address')
-                        ->columnSpan(2)
-                        ->label('Direccion')
-                        ->required(),
-                    TextInput::make('zip_code')
-                        ->label('Zip code'),
-                ]),
+                // Section::make('Direccion')
+                // ->columns(3)
+                // ->schema([
+                //     Select::make('country_id')
+                //         ->label('Pais')
+                //         ->relationship(name: 'country', titleAttribute: 'name')
+                //         ->searchable()
+                //         ->preload()
+                //         ->live()
+                //         ->afterStateUpdated(function (Set $set){
+                //             $set('state_id', null);
+                //             $set('city_id', null);
+                //         })
+                //         ->required(),
+                //     Select::make('state_id')
+                //         ->label('Estado')
+                //         ->options(fn (Get $get): Collection => State::query()
+                //             ->where('country_id', $get('country_id'))
+                //             ->pluck('name', 'id'))
+                //         ->searchable()
+                //         ->preload()
+                //         ->live()
+                //         ->afterStateUpdated(fn (Set $set) => $set('city_id', null))
+                //         ->required(),
+                //     Select::make('city_id')
+                //         ->label('Ciudad')
+                //         ->options(fn (Get $get): Collection => City::query()
+                //             ->where('state_id', $get('state_id'))
+                //             ->pluck('name', 'id'))
+                //         ->searchable()
+                //         ->preload()
+                //         ->required(),
+                //     TextInput::make('address')
+                //         ->columnSpan(2)
+                //         ->label('Direccion')
+                //         ->required(),
+                //     TextInput::make('zip_code')
+                //         ->label('Zip code'),
+                // ]),
             ])
         ];
     }

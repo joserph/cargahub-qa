@@ -139,7 +139,7 @@ final class ReturnReportItemForm
         $selectDisease = collect($get('returnReportItemDisease'));
         $totalPercent = $selectDisease->reduce(function ($totalPercent, $disease){
             // dd($totalPercent);
-            return intval($totalPercent) + intval($disease['percentage']);
+            return 100 - intval($disease['percentage']);
         }, 0);
 
         $set('qualification', $totalPercent);

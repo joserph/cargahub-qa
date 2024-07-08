@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ReturnReportItemResource\Pages;
 use App\Filament\Resources\ReturnReportItemResource\RelationManagers;
 use App\Models\ReturnReportItem;
+use App\Models\User;
 use App\Services\ReturnReportItemForm;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -95,9 +96,12 @@ class ReturnReportItemResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make(),
-                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->hidden(!User::isSuperAdmin()),
+                    Tables\Actions\ForceDeleteBulkAction::make()
+                        ->hidden(!User::isSuperAdmin()),
+                    Tables\Actions\RestoreBulkAction::make()
+                        ->hidden(!User::isSuperAdmin()),
                 ]),
             ]);
     }

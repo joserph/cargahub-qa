@@ -234,6 +234,18 @@
             text-align: center;
             line-height: 35px;
         }
+        .red-percent{
+            background-color: red;
+            padding: 5px;
+        }
+        .yellow-percent{
+            background-color: orange;
+            padding: 5px;
+        }
+        .green-percent{
+            background-color: green;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
@@ -284,7 +296,13 @@
         </article>
         <article class="calificacion">
             <h3 class="text-small">Calificacion</h3>
-            <p><span>{{ $returnReportItem->qualification }}%</span></p>
+            @if ($returnReportItem->qualification >= 96)
+                <p><span class="green-percent">{{ $returnReportItem->qualification }}%</span></p>
+            @elseif($returnReportItem->qualification >= 91 && $returnReportItem->qualification <= 95)
+                <p><span class="yellow-percent">{{ $returnReportItem->qualification }}%</span></p>
+            @else
+                <p><span class="red-percent">{{ $returnReportItem->qualification }}%</span></p>
+            @endif
         </article>
     </section>
     <section class="progress">

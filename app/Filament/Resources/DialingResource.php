@@ -43,53 +43,53 @@ class DialingResource extends Resource
                     ->extraAttributes(['class' => 'fi-uppercase'])
                     ->label('Nombre')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('phones.phone')
-                    ->sortable()
-                    ->label('Telefono')
-                    ->searchable(),
+                // Tables\Columns\TextColumn::make('phones.phone')
+                //     ->sortable()
+                //     ->label('Telefono')
+                //     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->extraAttributes(['class' => 'capitalize']),
-                Tables\Columns\TextColumn::make('address')
-                    ->sortable()
-                    ->label('Direccion')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('emails.email')
-                    ->sortable()
-                    ->label('Correo')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('country.name')
-                    ->sortable()
-                    ->label('Pais')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('state.name')
-                    ->sortable()
-                    ->label('Estado')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('city.name')
-                    ->sortable()
-                    ->label('Ciudad')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('zip_code')
-                    ->sortable()
-                    ->label('Zip Code')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                // Tables\Columns\TextColumn::make('address')
+                //     ->sortable()
+                //     ->label('Direccion')
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
+                // Tables\Columns\TextColumn::make('emails.email')
+                //     ->sortable()
+                //     ->label('Correo')
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
+                // Tables\Columns\TextColumn::make('country.name')
+                //     ->sortable()
+                //     ->label('Pais')
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
+                // Tables\Columns\TextColumn::make('state.name')
+                //     ->sortable()
+                //     ->label('Estado')
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
+                // Tables\Columns\TextColumn::make('city.name')
+                //     ->sortable()
+                //     ->label('Ciudad')
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
+                // Tables\Columns\TextColumn::make('zip_code')
+                //     ->sortable()
+                //     ->label('Zip Code')
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
                 // Tables\Columns\TextColumn::make('logistic.name')
                 //     ->sortable()
                 //     ->label('Empresa de Logistica')
                 //     ->searchable()
                 //     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->label('Fecha Creacion')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                // Tables\Columns\TextColumn::make('created_at')
+                //     ->dateTime()
+                //     ->label('Fecha Creacion')
+                //     ->sortable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 // Tables\Filters\TrashedFilter::make(),
@@ -107,7 +107,7 @@ class DialingResource extends Resource
                     ->successNotificationTitle('Cliente actualizado con exito!')
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['name'] = Str::of($data['name'])->upper();
-                        $data['address'] = Str::of($data['address'])->apa();
+                        // $data['address'] = Str::of($data['address'])->apa();
                         
                         return $data;
                     }),
