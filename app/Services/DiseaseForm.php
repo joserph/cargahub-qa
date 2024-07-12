@@ -10,6 +10,7 @@ final class DiseaseForm
 {
     protected static array $typeDisease = [
         'apariencia'    => 'Apariencia',
+        'enfermedades'  => 'Enfermedades',
         'empaque'       => 'Empaque',
         'follaje'       => 'Follaje',
         'flor'          => 'Flor',

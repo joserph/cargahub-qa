@@ -39,6 +39,9 @@ class PdfController extends Controller
         $diseasesSanidad = Disease::with(array('return_report_items_diseases' => function($query) use ($id){
             $query->select()->where('return_report_item_id', $id);
         }))->where('type', 'Sanidad')->orderBy('name','asc')->get();
+        $diseasesEnfermedades = Disease::with(array('return_report_items_diseases' => function($query) use ($id){
+            $query->select()->where('return_report_item_id', $id);
+        }))->where('type', 'Enfermedades')->orderBy('name','asc')->get();
         $diseasesTallos = Disease::with(array('return_report_items_diseases' => function($query) use ($id){
             $query->select()->where('return_report_item_id', $id);
         }))->where('type', 'Tallos')->orderBy('name','asc')->get();
@@ -52,10 +55,11 @@ class PdfController extends Controller
         $arrayImages = array_reverse($images->images);
         $diseasesItems = ReturnReportItemDisease::with('disease')->with('returnReportItem')->where('return_report_item_id', $returnReportItem->id)->get();
         $myCompany = MyCompany::first();
-        // dd($arrayImages);
-        $returnReportPdf = Pdf::loadView('pdfs.qualityControlReport', compact(
+        // dd($returnReportItem);
+
+        $returnReportPdf = Pdf::loadView('pdfs.' . $myCompany->model_pdf . '.qualityControlReport', compact(
             'returnReportItem', 'returnReport', 'diseasesApariencia', 'diseasesFlor', 'diseasesSanidad', 'diseasesTallos',
-            'diseasesFollaje', 'diseasesEmpaque', 'arrayImages', 'diseasesItems', 'myCompany'
+            'diseasesFollaje', 'diseasesEmpaque', 'arrayImages', 'diseasesItems', 'myCompany', 'diseasesEnfermedades'
         ));
         return $returnReportPdf->stream();
     }

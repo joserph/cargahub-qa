@@ -18,6 +18,11 @@ use Illuminate\Support\Facades\Auth;
 
 final class MyCompanyForm
 {
+    protected static array $modelos = [
+        'model01'   => 'Model-01',
+        'model02'   => 'Model-02',
+    ];
+
     public static function schema(): array
     {
         return [
@@ -57,7 +62,11 @@ final class MyCompanyForm
                                 ->label('Imagen de la empresa (300x300)')
                                 ->directory('company/')
                                 ->image()
-                                ->imageEditor()
+                                ->imageEditor(),
+                            Select::make('model_pdf')
+                                ->label('Modelo de PDF')
+                                ->options(self::$modelos)
+                                ->required(),
                         ]),
                     Section::make('Direccion')
                         ->columns(3)

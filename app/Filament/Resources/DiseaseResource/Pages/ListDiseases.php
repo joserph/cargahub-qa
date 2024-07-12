@@ -57,6 +57,12 @@ class ListDiseases extends ListRecords
                     return $query->where('type', 'empaque')->withoutTrashed();
                 });
             
+            $tabs['enfermedades'] = Tab::make('Enfermedades')
+                ->badge(Disease::where('type', 'enfermedades')->count())
+                ->modifyQueryUsing(function($query){
+                    return $query->where('type', 'enfermedades')->withoutTrashed();
+                });
+            
             $tabs['follaje'] = Tab::make('Follaje')
                 ->badge(Disease::where('type', 'follaje')->count())
                 ->modifyQueryUsing(function($query){

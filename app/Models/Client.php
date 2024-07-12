@@ -24,7 +24,7 @@ class Client extends Model
         // 'phone',
         // 'cell_phone',
         // 'email',
-        'status'
+        'status',
     ];
 
     protected $casts = [

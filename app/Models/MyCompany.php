@@ -22,6 +22,7 @@ class MyCompany extends Model
         'country_id',
         'email',
         'image_url',
+        'model_pdf'
     ];
 
     public function country(): BelongsTo
