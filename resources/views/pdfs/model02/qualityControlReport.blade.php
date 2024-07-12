@@ -523,7 +523,6 @@
             </tr>
             @foreach ($diseasesTallos as $item)
                 <tr>
-                    <td class="text-small-sx">{{ $item->name }}</td>
                     <td class="text-small-sx th-enfermedad
                         @if ($item->return_report_items_diseases == '[]')
                         verde
@@ -542,27 +541,14 @@
                         @else
                             @foreach ($item->return_report_items_diseases as $disease)
                                 @if ($disease->return_report_item_id == $returnReportItem->id)
-                                    <img class="x-icon" src="{{ public_path('storage/icons/x-solid.svg') }}" alt="">
+                                {{ $disease->percentage }}
                                 @else
                                     <img class="check-icon" src="{{ public_path('storage/icons/check-solid.svg') }}" alt="">
                                 @endif
                             @endforeach
                         @endif
                     </td>
-                    <td class="text-small-sx th-enfermedad text-center">
-                        @foreach ($item->return_report_items_diseases as $disease)
-                            @if ($disease->return_report_item_id == $returnReportItem->id)
-                                {{ $disease->percentage }}
-                            @endif
-                        @endforeach
-                    </td>
-                    <td class="text-small-sx th-enfermedad uppercase">
-                        @foreach ($item->return_report_items_diseases as $disease)
-                            @if ($disease->return_report_item_id == $returnReportItem->id)
-                                {{ $disease->returnReportItem->variety->name }}
-                            @endif
-                        @endforeach
-                    </td>
+                    <td class="text-small-sx">{{ $item->name }}</td>
                 </tr>
             @endforeach
         </table>
