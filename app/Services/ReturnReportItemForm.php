@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Dialing;
 use App\Models\Disease;
 use App\Models\Farm;
+use App\Models\ReturnReport;
 use App\Models\ReturnReportItemDisease;
 use App\Models\Variety;
 use Filament\Forms;
@@ -19,6 +20,7 @@ use Filament\Forms\Set;
 
 final class ReturnReportItemForm
 {
+    
     public static function schema(): array
     {
         return [
@@ -99,8 +101,12 @@ final class ReturnReportItemForm
                                     })
                                     ->addable(false)
                                     ->deletable(false)
-                                    
                                 ]),
+                            Hidden::make('return_report')
+                                ->label('algo')
+                                ->afterStateHydrated(function (Get $get, Set $set){
+                                    self::typeReport($get, $set);
+                                }),
                             TextInput::make('qualification')
                                 ->label('Calificacion Finca')
                                 ->numeric()
@@ -109,6 +115,12 @@ final class ReturnReportItemForm
                                 ->afterStateHydrated(function (Get $get, Set $set){
                                     self::updatePercent($get, $set);
                                 })
+                                ->hidden(fn (Get $get) => $get('return_report') === 'advertencia'),
+                            TextInput::make('qualification')
+                                ->label('Calificacion finca manual')
+                                ->numeric()
+                                ->prefix('%')
+                                ->hidden(fn (Get $get) => $get('return_report') != 'advertencia')
                     ])->columns(6),
                     
                     Section::make()
@@ -132,17 +144,41 @@ final class ReturnReportItemForm
                 ])->columns(4)
         ];
     }
+
+    public static function typeReport(Get $get, Set $set): void
+    {
+        $report = ReturnReport::find($get('return_report_id'));
+        // if($report->type_report == 'advertencia')
+        // {
+        //     return true;
+        // }else{
+        //     return false;
+        // }
+        // dd($set);
+        // $algo = 'algo';
+        $set('return_report', $report->type_report);
+    }
     
     public static function updatePercent(Get $get, Set $set): void
     {
         // Selecciono todos los valores del Repeater
         $selectDisease = collect($get('returnReportItemDisease'));
+        // dd($selectDisease->percentage);
         $totalPercent = $selectDisease->reduce(function ($totalPercent, $disease){
             // dd($totalPercent);
-            return 100 - intval($disease['percentage']);
-        }, 0);
+            // return 100 - intval($disease['percentage']);
+            return intval($totalPercent) - intval($disease['percentage']);
+        }, 100);
 
-        $set('qualification', $totalPercent);
+        $report = ReturnReport::find($get('return_report_id'));
+        // dd($report);
+        if($report->type_report == 'advertencia')
+        {
+            $percent = $get('qualification');
+        }else{
+            $percent = $totalPercent;
+        }
+        $set('qualification', $percent);
     }
 
     protected static array $guideType = [

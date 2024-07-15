@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('type_piece');
             $table->string('hawb');
             $table->foreignIdFor(Dialing::class)->constrained();
-            $table->text('observations');
+            $table->text('observations')->nullable();
             $table->text('images')->nullable();
             $table->string('qualification')->nullable();
             $table->softDeletes();

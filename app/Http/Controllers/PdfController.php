@@ -55,7 +55,7 @@ class PdfController extends Controller
         $arrayImages = array_reverse($images->images);
         $diseasesItems = ReturnReportItemDisease::with('disease')->with('returnReportItem')->where('return_report_item_id', $returnReportItem->id)->get();
         $myCompany = MyCompany::first();
-        // dd($returnReportItem);
+        // dd($returnReport);
 
         $returnReportPdf = Pdf::loadView('pdfs.' . $myCompany->model_pdf . '.qualityControlReport', compact(
             'returnReportItem', 'returnReport', 'diseasesApariencia', 'diseasesFlor', 'diseasesSanidad', 'diseasesTallos',

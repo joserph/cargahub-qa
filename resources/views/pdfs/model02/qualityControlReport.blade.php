@@ -31,7 +31,7 @@
         }
         .img{
             position: relative;
-            width: 16%;
+            width: 10%;
             display: inline-block;
             height: 80px;
             max-width: 125px;
@@ -44,7 +44,7 @@
             position: relative;
             top: -30px;
             display: inline-block;
-            width: 83%;
+            width: 89%;
         }
         .calificacion{
             position: relative;
@@ -280,6 +280,9 @@
             padding: 0;
             margin: 0;
         }
+        .calificacion-size{
+            width: 170px;
+        }
     </style>
 </head>
 <body>
@@ -295,21 +298,21 @@
                     <td class="text-small">{{ $returnReportItem->farm->name }}</td>
                     <td class="text-small text-right"><strong>DIA DE  INSPECCION:</strong></td>
                     <td class="text-small">{{ date('d-m-Y', strtotime($returnReport->date)) }}</td>
-                    <td class="border-line text-small text-center progress-part-1" colspan="2"><strong>100% Excelente</strong></td>
+                    <td class="border-line text-small text-center progress-part-1 calificacion-size" colspan="2"><strong>100% Excelente</strong></td>
                 </tr>
                 <tr>
                     <td class="text-small text-right"><strong>CLIENTE:</strong></td>
                     <td class="text-small">{{ $returnReportItem->dialing->name }}</td>
                     <td class="text-small text-right"><strong>PRODUCTO:</strong></td>
                     <td class="text-small">{{ $returnReportItem->product->name }}</td>
-                    <td class="border-line text-small text-center progress-part-2" colspan="2"><strong>95 - 91% Muy bueno</strong></td>
+                    <td class="border-line text-small text-center progress-part-2" colspan="2"><strong>95-91% Muy bueno</strong></td>
                 </tr>
                 <tr>
                     <td class="text-small text-right"><strong>DESTINO:</strong></td>
                     <td class="text-small">{{ $returnReport->country->name }}</td>
                     <td class="text-small text-right"><strong>VARIEDAD:</strong></td>
                     <td class="text-small">{{ $returnReportItem->variety->name }}</td>
-                    <td class="border-line text-small text-center progress-part-3" colspan="2"><strong>90 - 80% Devolucion finca</strong></td>
+                    <td class="border-line text-small text-center progress-part-3" colspan="2"><strong>90-80% Devolucion finca</strong></td>
                 </tr>
                 <tr>
                     <td class="text-small text-right"><strong>AGENCIA DE CARGA:</strong></td>
@@ -370,7 +373,7 @@
             </tr>
             @foreach ($diseasesEmpaque as $item)
                 <tr>
-                    <td class="text-small-sx th-enfermedad
+                    <td class="text-small-sx th-enfermedad text-center
                         @if ($item->return_report_items_diseases == '[]')
                             verde
                         @else
@@ -447,7 +450,7 @@
             </tr>
             @foreach ($diseasesFlor as $item)
                 <tr>
-                    <td class="text-small-sx th-enfermedad
+                    <td class="text-small-sx th-enfermedad text-center
                         @if ($item->return_report_items_diseases == '[]')
                         verde
                         @else
@@ -485,7 +488,7 @@
             </tr>
             @foreach ($diseasesFollaje as $item)
                 <tr>
-                    <td class="text-small-sx th-enfermedad
+                    <td class="text-small-sx th-enfermedad text-center
                         @if ($item->return_report_items_diseases == '[]')
                         verde
                         @else
@@ -523,7 +526,7 @@
             </tr>
             @foreach ($diseasesTallos as $item)
                 <tr>
-                    <td class="text-small-sx th-enfermedad
+                    <td class="text-small-sx th-enfermedad text-center
                         @if ($item->return_report_items_diseases == '[]')
                         verde
                         @else
@@ -561,7 +564,7 @@
             </tr>
             @foreach ($diseasesEnfermedades as $item)
                 <tr>
-                    <td class="text-small-sx th-enfermedad
+                    <td class="text-small-sx th-enfermedad text-center
                         @if ($item->return_report_items_diseases == '[]')
                         verde
                         @else
@@ -591,9 +594,12 @@
             @endforeach
         </table>
     </section>
+    @if ($returnReport->type_report == 'devolucion')
     <section class="observacion">
         <p class="text-observacion uppercase">Observaciones: {{ $returnReportItem->piece }} {{ $returnReportItem->type_piece }} en devolucion</p>
     </section>
+    @endif
+    
     <section class="titulo-foto">
         <p class="text-center">
             <img class="check-icon-3" src="{{ public_path('storage/icons/camera.png') }}" alt="">

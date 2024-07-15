@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('guide_type');
             $table->string('guide_number');
             $table->string('country_id')->nullable();
+            $table->string('type_report');
             $table->softDeletes();
 
             $table->timestamps();

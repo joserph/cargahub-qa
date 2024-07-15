@@ -20,7 +20,10 @@ use Illuminate\Support\Collection;
 
 final class ReturnReportForm
 {
-    
+    protected static array $reports = [
+        'devolucion'    => 'Devolucion',
+        'advertencia'   => 'Advertencia',
+    ];
 
     public static function schema(): array
     {
@@ -59,17 +62,15 @@ final class ReturnReportForm
                                 ->searchable()
                                 ->preload()
                                 ->required(),
-                            // Forms\Components\Select::make('destination')
-                            //     ->label('Destino')
-                            //     ->searchable()
-                            //     ->options(self::$countries)
-                            //     ->required(),
+                            Forms\Components\Select::make('type_report')
+                                ->label('Tipo de Informe')
+                                ->options(self::$reports)
+                                ->required(),
                         ])->columns([
                             'sm' => 4,
                         ]),
                     Forms\Components\Section::make()
                         ->schema([
-                            // Forms\Components\Placeholder::make('Detalle de Devoluciones'),
                             Repeater::make('returnReportItems')
                                 ->label('Detalle de Devoluciones')
                                 ->relationship()
@@ -99,7 +100,6 @@ final class ReturnReportForm
                                         ->options(fn (Get $get): Collection => Variety::query()
                                             ->where('product_id', $get('product_id'))
                                             ->pluck('name','id'))
-                                        // ->options(Variety::query()->pluck('name', 'id'))
                                         ->columnSpan(2)
                                         ->searchable()
                                         ->required(),
@@ -119,19 +119,11 @@ final class ReturnReportForm
                                         ->columnSpan(3)
                                         ->required()
                                         ->relationship('diseases', 'name'),
-                                    // Forms\Components\Select::make('disease_id')
-                                    //     ->label('Problema')
-                                    //     ->options(Disease::query()->pluck('name', 'id'))
-                                    //     ->multiple()
-                                    //     ->columnSpan(3)
-                                    //     ->searchable()
-                                    //     ->required(),
                                     Forms\Components\TextInput::make('piece')
                                         ->label('Cantidad')
                                         ->columnSpan(1)
                                         ->numeric()
                                         ->required(),
-                                    
                                     Forms\Components\Select::make('type_piece')
                                         ->label('Tipo de Piezas')
                                         ->options(self::$typePieces)

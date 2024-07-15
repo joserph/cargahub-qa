@@ -19,6 +19,7 @@ class ReturnReport extends Model
         'guide_type',
         'guide_number',
         'country_id',
+        'type_report',
     ];
 
     public function returnReportItems(): HasMany

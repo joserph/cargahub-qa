@@ -89,10 +89,12 @@ class ReturnReportItemResource extends Resource
                     ->iconButton()
                     ->iconSize('sm'),
                 Tables\Actions\RestoreAction::make(),
+                
                 Action::make('pdf')
                     ->icon('heroicon-o-arrow-down-on-square')
                     ->url(fn(ReturnReportItem $record) => route('quality-control-report.pdf', $record))
                     ->openUrlInNewTab()
+                    ->hidden(fn(ReturnReportItem $record): bool => is_null($record->images) ? true : false)
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
